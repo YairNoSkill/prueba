@@ -70,3 +70,42 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     e.target.reset();
     renderizarTareas(); // Recargar visualmente
 });
+
+// NUEVO: Lógica para Crear Usuarios
+// ==========================================
+document.getElementById('new-user-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const errorMsg = document.getElementById('new-user-error');
+    const successMsg = document.getElementById('new-user-success');
+    
+    const username = document.getElementById('new-username').value.trim();
+    const password = document.getElementById('new-password').value;
+    const rol = document.getElementById('new-role').value;
+
+    // Validación básica: evitar nombres duplicados
+    const usuariosExistentes = JSON.parse(localStorage.getItem('usuarios')) || [];
+    if (usuariosExistentes.some(u => u.username === username)) {
+        errorMsg.innerText = 'El nombre de usuario ya existe.';
+        successMsg.innerText = '';
+        return;
+    }
+
+    guardarUsuario({ username, password, rol });
+    
+    errorMsg.innerText = '';
+    successMsg.innerText = `Usuario '${username}' creado con éxito.`;
+    e.target.reset();
+
+    // Actualizamos las listas desplegables del Administrador
+    document.dispatchEvent(new CustomEvent('authChange', { detail: { loggedIn: true, user: getSesionActiva() } }));
+    
+    setTimeout(() => successMsg.innerText = '', 3000); // Ocultar mensaje de éxito tras 3 seg
+});
+
+// ==========================================
+// NUEVO: Lógica del Filtro de Tareas
+// ==========================================
+document.getElementById('filter-user')?.addEventListener('change', (e) => {
+    const filtroId = e.target.value;
+    renderizarTareas(filtroId);
+});

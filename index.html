@@ -14,7 +14,7 @@
             <h2>Iniciar Sesión</h2>
             <form id="login-form">
                 <input type="text" id="login-username" placeholder="Usuario (ej. admin)" required>
-                <input type="password" id="login-password" placeholder="Contraseña (ej. 123)" required>
+                <input type="password" id="login-password" placeholder="Contraseña " required>
                 <button type="submit">Ingresar</button>
                 <p id="login-error" class="error-msg"></p>
             </form>
@@ -37,6 +37,28 @@
                     <button type="submit">Crear Tarea</button>
                     <p id="task-error" class="error-msg"></p>
                 </form>
+            </div>
+            <div id="user-form-container" class="form-container hidden">
+                <h3>Crear Nuevo Usuario</h3>
+                <form id="new-user-form">
+                    <input type="text" id="new-username" placeholder="Nombre de usuario" required>
+                    <input type="password" id="new-password" placeholder="Contraseña" required>
+                    <label for="new-role">Seleccionar Rol:</label>
+                    <select id="new-role" required>
+                        <option value="Usuario_Normal">Usuario Normal</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                    <button type="submit">Crear Usuario</button>
+                    <p id="new-user-error" class="error-msg"></p>
+                    <p id="new-user-success" style="color: var(--success); font-size: 0.9em; margin-top: -10px;"></p>
+                </form>
+            </div>
+
+            <div id="admin-filters" class="hidden" style="margin-bottom: 15px;">
+                <label for="filter-user">Filtrar tareas por usuario:</label>
+                <select id="filter-user" style="width: 100%; max-width: 300px;">
+                    <option value="todos">Todos los usuarios</option>
+                </select>
             </div>
 
             <div class="tasks-container">

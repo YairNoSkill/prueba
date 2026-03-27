@@ -1,4 +1,4 @@
-// js/auth.js
+
 import { obtenerUsuarios } from './storage.js';
 
 export function getSesionActiva() {

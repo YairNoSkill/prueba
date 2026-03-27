@@ -1,15 +1,15 @@
-/* css/style.css */
+
 :root {
-    /* Paleta de colores moderna y suave */
-    --bg-color: #f8fafc;       /* Fondo gris-azulado muy claro */
-    --text-main: #1e293b;      /* Texto principal oscuro pero no negro puro */
-    --text-muted: #64748b;     /* Texto secundario */
-    --primary: #4f46e5;        /* Azul índigo moderno */
-    --primary-hover: #4338ca;
-    --secondary: #0ea5e9;      /* Azul cielo para acentos */
-    --danger: #ef4444;         /* Rojo vibrante para errores/vencidos */
+    /* Paleta de colores*/
+    --bg-color: #f8fafc;       
+    --text-main: #1e293b;      
+    --text-muted: #64748b;     
+    --primary: #de5b5b;        
+    --primary-hover: #f2031b;
+    --secondary: #0ea5e9;     
+    --danger: #ef4444;         
     --danger-hover: #dc2626;
-    --success: #10b981;        /* Verde esmeralda para completadas */
+    --success: #10b981;        
     --card-bg: #ffffff;
     --border-color: #e2e8f0;
 }
@@ -75,7 +75,7 @@ input, select, button {
 input:focus, select:focus {
     outline: none;
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    box-shadow: 0 0 0 3px rgba(117, 117, 127, 0.2);
 }
 
 button {
@@ -142,7 +142,7 @@ button:hover {
     background: var(--card-bg);
     padding: 20px;
     border-radius: 12px;
-    border-left: 6px solid var(--secondary);
+    border-left: 6px solid var(--primary);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     display: flex;
@@ -169,7 +169,7 @@ button:hover {
 .task-card.completada {
     border-left-color: var(--success);
     opacity: 0.8;
-    background-color: #f0fdf4; /* Fondo verdecito muy claro */
+    background-color: #f0fdf4; 
 }
 
 /* =========================================
@@ -205,4 +205,48 @@ button:hover {
     font-size: 0.9em;
     margin-top: -5px;
     text-align: center;
+}
+
+
+/* Le quitamos el borde al contenedor para que no se vea despegado */
+#user-form-container {
+    margin-bottom: 30px;
+}
+
+/* Le aplicamos el borde izquierdo SOLAMENTE a este formulario específico */
+#new-user-form {
+    border-left: 6px solid var(--primary);
+}
+
+.admin-filters {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: var(--card-bg);
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+.admin-filters label {
+    margin-bottom: 0;
+    white-space: nowrap;
+}
+
+.admin-filters select {
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+/* Ajuste responsive para el filtro en celulares */
+@media (max-width: 600px) {
+    .admin-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .admin-filters select {
+        max-width: 100%;
+    }
 }
