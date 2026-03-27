@@ -60,15 +60,20 @@ export function renderizarTareas() {
 // Configura la interfaz inicial según el rol del usuario que entró
 export function configurarInterfazUsuario(usuario) {
     document.getElementById('user-greeting').innerText = `Hola, ${usuario.username} (${usuario.rol})`;
+    
+    // CORRECCIÓN: Seleccionamos todo el contenedor del formulario, no solo el select
+    const formContainer = document.querySelector('.form-container');
     const selectUsuarios = document.getElementById('task-user-select');
     
-    // Si es admin, puede asignar tareas a otros. Si no, se oculta el select.
+    // Lógica estricta de Roles para la Interfaz
     if (usuario.rol === 'Administrador') {
-        selectUsuarios.classList.remove('hidden');
+        formContainer.classList.remove('hidden'); // Muestra todo el formulario
+        selectUsuarios.classList.remove('hidden'); // Muestra el select de usuarios
+        
         const todosUsuarios = obtenerUsuarios();
         selectUsuarios.innerHTML = todosUsuarios.map(u => `<option value="${u.id}">${u.username}</option>`).join('');
     } else {
-        selectUsuarios.classList.add('hidden');
-        selectUsuarios.innerHTML = `<option value="${usuario.id}">${usuario.username}</option>`;
+        // Si es usuario normal, ocultamos TODO el contenedor del formulario
+        formContainer.classList.add('hidden');
     }
 }

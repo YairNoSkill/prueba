@@ -3,9 +3,9 @@
 create table usuarios (
     id int primary key identity(1,1),
     username varchar(50) not null unique,
-    password varchar(255) not null, --espacio suficiente para la encriptacion
+    password varchar(255) not null, --espacio suficiente para el hash
     rol varchar(20) not null,
-    -- RestricciÛn para que solo acepte estos dos roles
+    -- Restriccion para que solo acepte estos dos roles
     check (rol in ('Administrador', 'Usuario_Normal')) 
 );
 
@@ -17,12 +17,35 @@ create table tareas (
     fecha_vencimiento date,
     usuario_id int not null,
     foreign key (usuario_id) references usuarios(id),
-    -- RestricciÛn para que solo acepte estos dos estados
+    -- Restriccion para que solo acepte estos dos estados
     check (estado in ('Pendiente', 'Completada')), 
-    -- RestricciÛn de integridad solicitada
+    -- Restriccion de integridad solicitada
     check (fecha_vencimiento >= fecha_creacion) 
 );
 
+------------------------------------------------
+--Insertar 3 usuarios y 5 tareas
+----------------------------------------
+
+insert into usuarios (username, password, rol) values 
+('admin_master', 'hash123', 'Administrador'),
+('dev_juan', 'hash456', 'Usuario_Normal'),
+('analista_maria', 'hash789', 'Usuario_Normal');
+
+-- Insertamos 5 tareas asignadas a distintos usuarios
+insert into tareas (titulo, estado, fecha_creacion, fecha_vencimiento, usuario_id) values
+-- Tarea normal para el futuro (Pendiente)
+('Configurar servidor backend', 'Pendiente', GETDATE(), DATEADD(day, 5, GETDATE()), 2),
+
+-- Tarea completada
+('Dise√±ar esquema de base de datos', 'Completada', '2026-03-20', '2026-03-25', 2),
+
+-- Tarea normal para el futuro (Pendiente)
+('Crear dashboard en Power BI', 'Pendiente', GETDATE(), DATEADD(day, 10, GETDATE()), 3),
+
+-- TAREAS ATRASADAS (Creadas en el pasado y vencidas en el pasado, respetando el CHECK)
+('Optimizar consultas SQL', 'Pendiente', '2026-03-01', '2026-03-15', 3),
+('Revisar seguridad', 'Pendiente', '2026-03-10', '2026-03-12', 1);
 
 --------------------------------------------------
 
