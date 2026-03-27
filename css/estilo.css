@@ -1,0 +1,140 @@
+/* css/style.css */
+:root {
+    --bg-color: #f4f7f6;
+    --primary: #2c3e50;
+    --secondary: #3498db;
+    --danger: #e74c3c;
+    --success: #2ecc71;
+    --card-bg: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    padding: 20px;
+    color: var(--primary);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Vistas */
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Formularios - Mobile First */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+input,
+select,
+button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+
+/* Dashboard Header (Flexbox) */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* Grid de Tareas (CSS Grid) */
+.task-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+@media (min-width: 600px) {
+    .task-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Tarjetas de Tarea */
+.task-card {
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 5px solid var(--secondary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-card.completada {
+    border-left-color: var(--success);
+    opacity: 0.7;
+}
+
+/*  Diferenciación visual tareas vencidas */
+.task-card.vencida {
+    border-left-color: var(--danger);
+    background-color: #fdf2f2;
+    animation: parpadeo 2s infinite;
+}
+
+.vencida-alerta {
+    color: var(--danger);
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+@keyframes parpadeo {
+    0% {
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.2);
+    }
+
+    50% {
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+    }
+
+    100% {
+        box-shadow: 0 0 5px rgba(231, 76, 60, 0.2);
+    }
+}
+
+.error-msg {
+    color: var(--danger);
+    font-size: 0.9em;
+    margin-top: -10px;
+}
